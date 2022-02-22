@@ -1,12 +1,48 @@
 import { createStore } from "vuex"
 import  axiosClient  from "../axios"
 
+const tmpSurveys = [
+{
+    id:10,
+    title: "Exemplo de titulo para a aula",
+    slug: "exemplo-de-titulo-para-a-aula",
+    status: "draft",
+    image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
+    description:"adsadasd",
+    created_at:"2022-12-28",
+    updated_at:"2022-12-28",
+    expire_date:"2022-12-28",
+    questions:[
+        {
+            id:1,
+            type:"select",
+            question: "From wich country are you?",
+            description:null,
+            data:{
+                options:[
+                    {
+                        uuid:"asdjiasodjiaasdasdasdasdaas",text:"USA"
+                    },
+                    {
+                        uuid:"asdsaddasdasasasasqwewqeqwe",text:"Georgia"
+                    },
+                     {
+                        uuid:"asaassdccccwwwqqqqqqqweqwew",text:"India"
+                    },
+                ]
+            }
+        }
+    ]
+}
+];
+
 const store = createStore({
     state: {
         user: {
             token: sessionStorage.getItem("TOKEN"),
-            data: {}
-        }
+            data: {},
+        },
+        surveys:[...tmpSurveys]
     },
 
     getters: {},
@@ -24,12 +60,20 @@ const store = createStore({
                 commit("setUser",data);
                 return data;
             })
+        },
+        logout({commit}){
+            return axiosClient.post(`/logout`)
+            .then(response =>{
+                commit('logout');
+                return response;
+            })
         }
     },
     mutations: {
         logout: (state) => {
             state.user.data = {};
             state.user.token = null;
+            sessionStorage.removeItem("TOKEN");
         },
         setUser: (state, userData) => {
             state.user.token = userData.token;
