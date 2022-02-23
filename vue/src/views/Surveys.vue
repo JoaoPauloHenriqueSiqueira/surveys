@@ -76,7 +76,7 @@
                               <button
                                     v-if="survey.id"
                                     type="button"
-                                    @click="emit('delete', survey)"
+                                    @click="deleteSurvey(survey)"
                                     class="h-8 w-8 flex items-center justify-center rounded-full border border-transparent text-sm text-red-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                     >
                                     <svg
@@ -106,4 +106,10 @@ import {computed} from 'vue';
 const surveys = computed(()=>
       store.state.surveys
 )
+
+function deleteSurvey(survey){
+      if(confirm("Are you sure you want to delete this survey?")){
+      
+      }
+}
 </script>

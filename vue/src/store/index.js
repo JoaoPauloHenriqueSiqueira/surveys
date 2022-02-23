@@ -3,8 +3,59 @@ import  axiosClient  from "../axios"
 
 const tmpSurveys = [
 {
-    id:10,
-    title: "Exemplo de titulo para a aula",
+    id:1,
+    title: "dddd de titulo para a aula",
+    slug: "exemplo-de-titulo-para-a-aula",
+    status: "draft",
+    image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
+    description:"adsadasd",
+    created_at:"2022-12-28",
+    updated_at:"2022-12-28",
+    expire_date:"2022-12-28",
+    questions:[
+        {
+            id:1,
+            type:"select",
+            question: "From wich country are you?",
+            description:null,
+            data:{
+                options:[
+                    {
+                        uuid:"asdjiasodjiaasdasdasdasdaas",text:"USA"
+                    },
+                    {
+                        uuid:"asdsaddasdasasasasqwewqeqwe",text:"Georgia"
+                    },
+                     {
+                        uuid:"asaassdccccwwwqqqqqqqweqwew",text:"India"
+                    },
+                ]
+            }
+        },
+         {
+            id:2,
+            type:"checkbox",
+            question: "From ?",
+            description:null,
+            data:{
+                options:[
+                    {
+                        uuid:"asdjiasodjiaasdasdasdasdaas",text:"USA"
+                    },
+                    {
+                        uuid:"asdsaddasdasasasasqwewqeqwe",text:"Georgia"
+                    },
+                     {
+                        uuid:"asaassdccccwwwqqqqqqqweqwew",text:"India"
+                    },
+                ]
+            }
+        }
+    ],
+},
+{
+    id:2,
+    title: "ASdasdasd de titulo para a aula",
     slug: "exemplo-de-titulo-para-a-aula",
     status: "draft",
     image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
@@ -35,8 +86,8 @@ const tmpSurveys = [
     ]
 },
 {
-    id:10,
-    title: "Exemplo de titulo para a aula",
+    id:3,
+    title: "dsdaasddasdas aasdla",
     slug: "exemplo-de-titulo-para-a-aula",
     status: "draft",
     image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
@@ -67,8 +118,8 @@ const tmpSurveys = [
     ]
 },
 {
-    id:10,
-    title: "Exemplo de titulo para a aula",
+    id:4,
+    title: "Exempdasa",
     slug: "exemplo-de-titulo-para-a-aula",
     status: "draft",
     image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
@@ -99,40 +150,8 @@ const tmpSurveys = [
     ]
 },
 {
-    id:10,
-    title: "Exemplo de titulo para a aula",
-    slug: "exemplo-de-titulo-para-a-aula",
-    status: "draft",
-    image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
-    description:"adsadasd",
-    created_at:"2022-12-28",
-    updated_at:"2022-12-28",
-    expire_date:"2022-12-28",
-    questions:[
-        {
-            id:1,
-            type:"select",
-            question: "From wich country are you?",
-            description:null,
-            data:{
-                options:[
-                    {
-                        uuid:"asdjiasodjiaasdasdasdasdaas",text:"USA"
-                    },
-                    {
-                        uuid:"asdsaddasdasasasasqwewqeqwe",text:"Georgia"
-                    },
-                     {
-                        uuid:"asaassdccccwwwqqqqqqqweqwew",text:"India"
-                    },
-                ]
-            }
-        }
-    ]
-},
-{
-    id:10,
-    title: "Exemplo de titulo para a aula",
+    id:5,
+    title: "Exemplo de titulo para a aula '1",
     slug: "exemplo-de-titulo-para-a-aula",
     status: "draft",
     image:"https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
@@ -170,7 +189,8 @@ const store = createStore({
             token: sessionStorage.getItem("TOKEN"),
             data: {},
         },
-        surveys:[...tmpSurveys]
+        surveys:[...tmpSurveys],
+        questionTypes: ["text","select","radio","checkbox","textarea"]
     },
 
     getters: {},
