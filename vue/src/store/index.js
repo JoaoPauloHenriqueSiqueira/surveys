@@ -189,6 +189,12 @@ const store = createStore({
             token: sessionStorage.getItem("TOKEN"),
             data: {},
         },
+        currentSurvey: {
+            loading: false,
+            data: {
+
+            }
+        },
         surveys: [...tmpSurveys],
         questionTypes: ["text", "select", "radio", "checkbox", "textarea"]
     },
@@ -224,19 +230,32 @@ const store = createStore({
                 response = axiosClient
                     .put(`/survey/${survey.id}`, survey)
                     .then((res) => {
-                        commit("updateSurvey", res.data);
+                        commit("setCurrentSurvey", res.data);
                         return res;
                     })
 
             } else {
                 response = axiosClient.post(`/survey`, survey)
                     .then((res) => {
-                        commit("saveSurvey", res.data);
+                        commit("setCurrentSurvey", res.data);
                         return res;
                     })
             }
 
             return response;
+        },
+        getSurvey({ commit }, id) {
+            commit("setCurrentSurveyLoading", true);
+            return axiosClient.get(`/survey/${id}`)
+                .then((res) => {
+                    commit("setCurrentSurvey", res.data);
+                    commit("setCurrentSurveyLoading", false);
+                    return res;
+                })
+                .catch((err) => {
+                    commit("setCurrentSurveyLoading", false);
+                    throw err;
+                })
         }
     },
     mutations: {
@@ -250,19 +269,11 @@ const store = createStore({
             state.user.data = userData.user;
             sessionStorage.setItem("TOKEN", userData.token);
         },
-        updateSurvey: (state, survey) => {
-            state.surveys = state.surveys.map((s) => {
-                if (s.id == survey.data.id) {
-                    return survey.data;
-                }
-
-                return s;
-            })
+        setCurrentSurvey: (state, survey) => {
+            state.currentSurvey.data = survey.data;
         },
-        saveSurvey: (state, survey) => {
-            console.log(state.surveys);
-            console.log(survey.data);
-            state.surveys = [...state.surveys, survey.data];
+        setCurrentSurveyLoading: (state, loading) => {
+            state.currentSurvey.loading = loading;
         },
     },
     modules: {}
