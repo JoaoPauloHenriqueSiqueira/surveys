@@ -364,9 +364,12 @@ function addQuestion(index) {
 
 function saveSurvey() {
   store.dispatch("saveSurvey", model.value).then((data) => {
+    // router.push({
+    //   name: "SurveyView",
+    //   params: { id: data.data.data.id },
+    // });
     router.push({
-      name: "SurveyView",
-      params: { id: data.data.data.id },
+      name: "Surveys"
     });
   });
 }

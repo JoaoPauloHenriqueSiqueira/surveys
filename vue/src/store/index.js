@@ -1,188 +1,6 @@
 import { createStore } from "vuex"
 import axiosClient from "../axios"
 
-const tmpSurveys = [
-    {
-        id: 1,
-        title: "dddd de titulo para a aula",
-        slug: "exemplo-de-titulo-para-a-aula",
-        status: "draft",
-        image: "https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
-        description: "adsadasd",
-        created_at: "2022-12-28",
-        updated_at: "2022-12-28",
-        expire_date: "2022-12-28",
-        questions: [
-            {
-                id: 1,
-                type: "select",
-                question: "From wich country are you?",
-                description: null,
-                data: {
-                    options: [
-                        {
-                            uuid: "asdjiasodjiaasdasdasdasdaas", text: "USA"
-                        },
-                        {
-                            uuid: "asdsaddasdasasasasqwewqeqwe", text: "Georgia"
-                        },
-                        {
-                            uuid: "asaassdccccwwwqqqqqqqweqwew", text: "India"
-                        },
-                    ]
-                }
-            },
-            {
-                id: 2,
-                type: "checkbox",
-                question: "From ?",
-                description: null,
-                data: {
-                    options: [
-                        {
-                            uuid: "asdjiasodjiaasdasdasdasdaas", text: "USA"
-                        },
-                        {
-                            uuid: "asdsaddasdasasasasqwewqeqwe", text: "Georgia"
-                        },
-                        {
-                            uuid: "asaassdccccwwwqqqqqqqweqwew", text: "India"
-                        },
-                    ]
-                }
-            }
-        ],
-    },
-    {
-        id: 2,
-        title: "ASdasdasd de titulo para a aula",
-        slug: "exemplo-de-titulo-para-a-aula",
-        status: "draft",
-        image: "https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
-        description: "adsadasd",
-        created_at: "2022-12-28",
-        updated_at: "2022-12-28",
-        expire_date: "2022-12-28",
-        questions: [
-            {
-                id: 1,
-                type: "select",
-                question: "From wich country are you?",
-                description: null,
-                data: {
-                    options: [
-                        {
-                            uuid: "asdjiasodjiaasdasdasdasdaas", text: "USA"
-                        },
-                        {
-                            uuid: "asdsaddasdasasasasqwewqeqwe", text: "Georgia"
-                        },
-                        {
-                            uuid: "asaassdccccwwwqqqqqqqweqwew", text: "India"
-                        },
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        id: 3,
-        title: "dsdaasddasdas aasdla",
-        slug: "exemplo-de-titulo-para-a-aula",
-        status: "draft",
-        image: "https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
-        description: "adsadasd",
-        created_at: "2022-12-28",
-        updated_at: "2022-12-28",
-        expire_date: "2022-12-28",
-        questions: [
-            {
-                id: 1,
-                type: "select",
-                question: "From wich country are you?",
-                description: null,
-                data: {
-                    options: [
-                        {
-                            uuid: "asdjiasodjiaasdasdasdasdaas", text: "USA"
-                        },
-                        {
-                            uuid: "asdsaddasdasasasasqwewqeqwe", text: "Georgia"
-                        },
-                        {
-                            uuid: "asaassdccccwwwqqqqqqqweqwew", text: "India"
-                        },
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        id: 4,
-        title: "Exempdasa",
-        slug: "exemplo-de-titulo-para-a-aula",
-        status: "draft",
-        image: "https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
-        description: "adsadasd",
-        created_at: "2022-12-28",
-        updated_at: "2022-12-28",
-        expire_date: "2022-12-28",
-        questions: [
-            {
-                id: 1,
-                type: "select",
-                question: "From wich country are you?",
-                description: null,
-                data: {
-                    options: [
-                        {
-                            uuid: "asdjiasodjiaasdasdasdasdaas", text: "USA"
-                        },
-                        {
-                            uuid: "asdsaddasdasasasasqwewqeqwe", text: "Georgia"
-                        },
-                        {
-                            uuid: "asaassdccccwwwqqqqqqqweqwew", text: "India"
-                        },
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        id: 5,
-        title: "Exemplo de titulo para a aula '1",
-        slug: "exemplo-de-titulo-para-a-aula",
-        status: "draft",
-        image: "https://help.twitter.com/content/dam/help-twitter/brand/logo.png",
-        description: "adsadasd",
-        created_at: "2022-12-28",
-        updated_at: "2022-12-28",
-        expire_date: "2022-12-28",
-        questions: [
-            {
-                id: 1,
-                type: "select",
-                question: "From wich country are you?",
-                description: null,
-                data: {
-                    options: [
-                        {
-                            uuid: "asdjiasodjiaasdasdasdasdaas", text: "USA"
-                        },
-                        {
-                            uuid: "asdsaddasdasasasasqwewqeqwe", text: "Georgia"
-                        },
-                        {
-                            uuid: "asaassdccccwwwqqqqqqqweqwew", text: "India"
-                        },
-                    ]
-                }
-            }
-        ]
-    }
-];
-
 const store = createStore({
     state: {
         user: {
@@ -195,7 +13,12 @@ const store = createStore({
 
             }
         },
-        surveys: [...tmpSurveys],
+        surveys: {
+            loading:false,
+            data:{
+
+            }
+        },
         questionTypes: ["text", "select", "radio", "checkbox", "textarea"]
     },
 
@@ -257,6 +80,19 @@ const store = createStore({
                     throw err;
                 })
         },
+        getSurveys({ commit }) {
+            commit("setSurveysLoading", true);
+            return axiosClient.get(`/survey`)
+                .then((res) => {
+                    commit("setSurveys", res.data);
+                    commit("setSurveysLoading", false);
+                    return res;
+                })
+                .catch((err) => {
+                    commit("setSurveysLoading", false);
+                    throw err;
+                })
+        },
         deleteSurvey({ }, id) {
             return axiosClient.delete(`/survey/${id}`)
                 .then((res) => {
@@ -283,6 +119,13 @@ const store = createStore({
         },
         setCurrentSurveyLoading: (state, loading) => {
             state.currentSurvey.loading = loading;
+        },
+        setSurveysLoading: (state, loading) => {
+            state.surveys.loading = loading;
+        },
+        setSurveys: (state, surveys) => {
+            //debugger;
+            state.surveys.data = surveys.data;
         },
     },
     modules: {}
