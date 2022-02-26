@@ -111,7 +111,6 @@ class SurveyController extends Controller
      */
     public function update(UpdateSurveyRequest $request, Survey $survey)
     {
-        \Log::info("XXXXX");
         $data = $request->validated();
 
         // Check if image was given and save on local file system
@@ -172,6 +171,11 @@ class SurveyController extends Controller
 
         if ($survey->user_id !== $user->id) {
             return abort(403, "Unauthorized action");
+        }
+
+        if ($survey->image) {
+            $absolutePath = public_path($survey->image);
+            File::delete($absolutePath);
         }
 
         $survey->delete();

@@ -256,6 +256,15 @@ const store = createStore({
                     commit("setCurrentSurveyLoading", false);
                     throw err;
                 })
+        },
+        deleteSurvey({ }, id) {
+            return axiosClient.delete(`/survey/${id}`)
+                .then((res) => {
+                    return res;
+                })
+                .catch((err) => {
+                    throw err;
+                })
         }
     },
     mutations: {

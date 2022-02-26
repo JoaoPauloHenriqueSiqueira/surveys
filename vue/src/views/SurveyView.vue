@@ -5,9 +5,34 @@
         <h1 class="text-3x1 font-bold text-gray-900">
           {{ route.params.id ? model.title : "Create a Survey" }}
         </h1>
+
+        <button
+            v-if="route.params.id"
+            type="button"
+            @click="deleteSurvey()"
+            class="py-2 px-3 text-white bg-red-500 rounded-md hover:bg-red-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 -mt-1 inline-block"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Delete Survey
+          </button>
+
       </div>
     </template>
-    <form @submit.prevent="saveSurvey">
+    <div v-if="surveyLoading" class="flex justify-center">
+      Loading
+    </div>
+    <form v-else @submit.prevent="saveSurvey">
       <div class="shadow sm:rounded-md sm:overflow-hidden">
         <!-- Survey Fields -->
         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
@@ -197,7 +222,6 @@
           <!--/ Status -->
         </div>
         <!--/ Survey Fields -->
-
         <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
           <h3 class="text-2xl font-semibold flex items-center justify-between">
             Questions
@@ -280,7 +304,7 @@
 
 <script setup>
 import store from "../store";
-import { ref, watch} from "vue";
+import { ref, watch, computed} from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import PageComponent from "../components/PageComponent.vue";
@@ -289,6 +313,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const route = useRoute();
 const router = useRouter();
+
+const surveyLoading = computed(() => store.state.currentSurvey.loading)
 
 let model = ref({
   title: "",
@@ -343,6 +369,20 @@ function saveSurvey() {
       params: { id: data.data.data.id },
     });
   });
+}
+
+function deleteSurvey() {
+  if (
+    confirm(
+      `Are you sure you want to delete this survey? Operation can't be undone!!`
+    )
+  ) {
+    store.dispatch("deleteSurvey", model.value.id).then(() => {
+      router.push({
+        name: "Surveys",
+      });
+    });
+  }
 }
 
 function deleteQuestion(question) {
