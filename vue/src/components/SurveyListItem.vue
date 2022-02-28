@@ -1,6 +1,14 @@
 <template>
   <div
-    class="flex flex-col py-4 px-6 shadow-md bg-white hover:bg-gray-50 h-[470px]"
+    class="
+      flex flex-col
+      py-4
+      px-6
+      shadow-md
+      bg-white
+      hover:bg-gray-50
+      h-[470px]
+    "
   >
     <img
       :src="
@@ -16,7 +24,18 @@
     <div class="flex justify-between items-center mt-3">
       <router-link
         :to="{ name: 'SurveyView', params: { id: survey.id } }"
-        class="flex py-2 px-4 border border-transparent text-sm rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="
+          flex
+          py-2
+          px-4
+          border border-transparent
+          text-sm
+          rounded-md
+          text-white
+          bg-indigo-600
+          hover:bg-indigo-700
+          focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +57,17 @@
         <a
           :href="`/view/survey/${survey.slug}`"
           target="_blank"
-          class="h-8 w-8 flex items-center justify-center rounded-full border border-transparent text-sm text-indigo-500 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          class="
+            h-8
+            w-8
+            flex
+            items-center
+            justify-center
+            rounded-full
+            border border-transparent
+            text-sm text-indigo-500
+            focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +88,17 @@
           v-if="survey.id"
           type="button"
           @click="emit('delete', survey)"
-          class="h-8 w-8 flex items-center justify-center rounded-full border border-transparent text-sm text-red-500 focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          class="
+            h-8
+            w-8
+            flex
+            items-center
+            justify-center
+            rounded-full
+            border border-transparent
+            text-sm text-red-500
+            focus:ring-2 focus:ring-offset-2 focus:ring-red-500
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
