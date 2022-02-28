@@ -14,12 +14,17 @@ const store = createStore({
             }
         },
         surveys: {
-            loading:false,
-            data:{
+            loading: false,
+            data: {
 
             }
         },
-        questionTypes: ["text", "select", "radio", "checkbox", "textarea"]
+        questionTypes: ["text", "select", "radio", "checkbox", "textarea"],
+        notification: {
+            show: false,
+            message: null,
+            type: null
+        }
     },
 
     getters: {},
@@ -104,6 +109,14 @@ const store = createStore({
         }
     },
     mutations: {
+        notify: (state, { message, type }) => {
+            state.notification.message = message;
+            state.notification.type = type;
+            state.notification.show = true;
+            setTimeout(() => {
+                state.notification.show = false;
+            }, 3000)
+        },
         logout: (state) => {
             state.user.data = {};
             state.user.token = null;

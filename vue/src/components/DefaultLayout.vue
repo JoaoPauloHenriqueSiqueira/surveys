@@ -97,6 +97,7 @@
     </Disclosure>
 
     <router-view></router-view>
+    <Notification/>
   </div>
 </template>
 
@@ -106,6 +107,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import {computed} from 'vue'
+import Notification from './Notification.vue';
 
 
 const navigation = [
@@ -125,6 +127,7 @@ export default {
     BellIcon,
     MenuIcon,
     XIcon,
+    Notification
   },
   setup() {
 
